@@ -2,6 +2,8 @@
 
 A Chrome Extension (Manifest V3) that reminds you to look away every 10 minutes for 20 seconds.
 
+<img width="1400" height="560" alt="Frame 214722c8136" src="https://github.com/user-attachments/assets/1b1cd7ab-55ca-41d8-ab0c-84cef1ef7998" />
+
 ## Installation
 
 1. Open Chrome and navigate to `chrome://extensions`.
