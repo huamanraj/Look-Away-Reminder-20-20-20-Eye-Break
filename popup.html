@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Look Away Reminder</title>
+    <link rel="stylesheet" href="popup.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Look Away</h1>
+            <div id="status-badge" class="badge">Checking...</div>
+        </header>
+
+        <main>
+            <div class="visual-container">
+                <div class="ring-container">
+                    <svg class="progress-ring" width="120" height="120">
+                        <circle class="progress-ring__bg" stroke-width="4" fill="transparent" r="52" cx="60" cy="60" />
+                        <circle class="progress-ring__circle" stroke-width="4" fill="transparent" r="52" cx="60"
+                            cy="60" />
+                    </svg>
+                    <div class="timer-text" id="timer-display">20:20</div>
+                </div>
+                <p id="sub-message" class="sub-message">Loading...</p>
+            </div>
+
+            <div class="controls">
+                <button id="toggle-btn" class="btn primary">Start</button>
+                <button id="test-btn" class="btn secondary">Test</button>
+            </div>
+        </main>
+
+        <footer>
+            <button id="options-btn" class="link-btn">Settings</button>
+        </footer>
+    </div>
+    <script src="popup.js"></script>
+</body>
+
+</html>

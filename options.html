@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - Look Away Reminder</title>
+    <link rel="stylesheet" href="options.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h2>Settings</h2>
+        </header>
+
+        <form id="settings-form">
+            <div class="card">
+                <div class="form-group">
+                    <label for="interval">Reminder Interval (minutes)</label>
+                    <input type="number" id="interval" min="1" max="120" class="input-field" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="break">Break Duration (seconds)</label>
+                    <input type="number" id="break" min="5" max="120" class="input-field" required>
+                </div>
+
+                <div class="divider"></div>
+
+                <div class="form-group-row">
+                    <label for="sound">Play Sound</label>
+                    <label class="switch">
+                        <input type="checkbox" id="sound">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+
+                <div class="form-group-row">
+                    <label for="notifications">Show Notification</label>
+                    <label class="switch">
+                        <input type="checkbox" id="notifications">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="actions">
+                <button type="submit" class="btn primary">Save Changes</button>
+            </div>
+        </form>
+
+        <div id="toast" class="toast">Saved successfully!</div>
+    </div>
+    <script src="options.js"></script>
+</body>
+
+</html>
