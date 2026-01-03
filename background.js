@@ -30,10 +30,13 @@ async function init() {
 
     const localState = await chrome.storage.local.get(['running', 'nextTriggerAt']);
     // Default to running if not set
-    STATE.running = localState.running !== false;
+    const isRunning = localState.running !== false;
+
+    // Sync memory state
+    STATE.running = isRunning;
     STATE.nextTriggerAt = localState.nextTriggerAt;
 
-    if (STATE.running) {
+    if (isRunning) {
         // Check if alarm exists, if not create it
         const alarm = await chrome.alarms.get('reminder_loop');
         if (!alarm) {
@@ -51,8 +54,8 @@ async function setupAlarm(intervalMinutes) {
     });
 
     STATE.nextTriggerAt = Date.now() + intervalMinutes * 60 * 1000;
-    await chrome.storage.local.set({ running: true, nextTriggerAt: STATE.nextTriggerAt });
     STATE.running = true;
+    await chrome.storage.local.set({ running: true, nextTriggerAt: STATE.nextTriggerAt });
 }
 
 // Helper: Stop Alarm
@@ -100,10 +103,6 @@ async function triggerReminder() {
     if (settings.soundEnabled) {
         await playSound();
     }
-
-    // Use a timeout to clear break active state in storage? 
-    // Not strictly necessary for background but good for cleanup.
-    // Although service worker might go inactive, so reliance on storage is better.
 }
 
 async function playSound() {
@@ -131,19 +130,18 @@ async function playSound() {
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     (async () => {
         if (msg.action === 'getStatus') {
-            const settings = (await chrome.storage.sync.get('settings')).settings || DEFAULT_SETTINGS;
-            // Also re-read local state to be sure
-            const local = await chrome.storage.local.get(['nextTriggerAt', 'breakActiveUntil']);
-
-            sendResponse({
-                running: STATE.running,
-                settings: settings,
-                nextTriggerAt: local.nextTriggerAt || STATE.nextTriggerAt,
-                breakActiveUntil: local.breakActiveUntil
-            });
+            sendResponse(await getStatusPayload());
         } else if (msg.action === 'toggleRunning') {
+            const local = await chrome.storage.local.get('running');
+            const isRunning = local.running === true; // Treat explicit false as false, undefined as true (handled in init/setup) but let's be safe.
+            // Wait, defaults:
+            // If storage is empty, init() sets logic.
+            // Here we should trust storage. If storage is undefined, init logic says defaults to true.
+            // But usually init has run.
+
             const settings = (await chrome.storage.sync.get('settings')).settings || DEFAULT_SETTINGS;
-            if (STATE.running) {
+
+            if (isRunning) {
                 await stopAlarm();
             } else {
                 await setupAlarm(settings.intervalMinutes);
@@ -154,7 +152,8 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
             sendResponse({ success: true });
         } else if (msg.action === 'updateSettings') {
             await chrome.storage.sync.set({ settings: msg.settings });
-            if (STATE.running) {
+            const local = await chrome.storage.local.get('running');
+            if (local.running === true) {
                 // Restart alarm with new interval
                 await setupAlarm(msg.settings.intervalMinutes);
             }
@@ -166,9 +165,15 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 
 async function getStatusPayload() {
     const settings = (await chrome.storage.sync.get('settings')).settings || DEFAULT_SETTINGS;
-    const local = await chrome.storage.local.get(['nextTriggerAt', 'breakActiveUntil']);
+    const local = await chrome.storage.local.get(['running', 'nextTriggerAt', 'breakActiveUntil']);
+
+    // Explicitly derive running from storage to handle Service Worker wakeups
+    const isRunning = local.running !== false; // Default true if missing? 
+    // In init we used localState.running !== false.
+    // So consistent logic:
+
     return {
-        running: STATE.running,
+        running: isRunning,
         settings: settings,
         nextTriggerAt: local.nextTriggerAt,
         breakActiveUntil: local.breakActiveUntil
