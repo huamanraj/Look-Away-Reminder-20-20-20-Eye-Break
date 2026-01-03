@@ -8,50 +8,178 @@
     <link rel="stylesheet" href="options.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    <div class="container">
-        <header>
-            <h2>Settings</h2>
-        </header>
+    <div class="layout">
 
-        <form id="settings-form">
-            <div class="card">
-                <div class="form-group">
-                    <label for="interval">Reminder Interval (minutes)</label>
-                    <input type="number" id="interval" min="1" max="120" class="input-field" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="break">Break Duration (seconds)</label>
-                    <input type="number" id="break" min="5" max="120" class="input-field" required>
-                </div>
-
-                <div class="divider"></div>
-
-                <div class="form-group-row">
-                    <label for="sound">Play Sound</label>
-                    <label class="switch">
-                        <input type="checkbox" id="sound">
-                        <span class="slider round"></span>
-                    </label>
-                </div>
-
-                <div class="form-group-row">
-                    <label for="notifications">Show Notification</label>
-                    <label class="switch">
-                        <input type="checkbox" id="notifications">
-                        <span class="slider round"></span>
-                    </label>
-                </div>
+        <aside class="sidebar">
+            <div class="brand">
+                <img src="icons/icon128.png" alt="Logo" class="sidebar-logo">
+                <h2>Look Away</h2>
             </div>
+            <nav>
+                <a href="#settings" class="nav-link active">Settings</a>
+                <a href="#about" class="nav-link">About & Benefits</a>
+            </nav>
+        </aside>
 
-            <div class="actions">
-                <button type="submit" class="btn primary">Save Changes</button>
-            </div>
-        </form>
+        <main class="content">
+
+            <!-- Settings Section -->
+            <section id="settings" class="section">
+                <div class="section-header">
+                    <h2>Preferences</h2>
+                    <p>Customize your break schedule.</p>
+                </div>
+
+                <form id="settings-form" class="card">
+                    <div class="form-row">
+                        <div class="label-group">
+                            <label for="interval">Frequency</label>
+                            <span class="helper">How often to look away (minutes)</span>
+                        </div>
+                        <input type="number" id="interval" min="1" max="120" class="input-field" required>
+                    </div>
+
+                    <div class="divider"></div>
+
+                    <div class="form-row">
+                        <div class="label-group">
+                            <label for="break">Duration</label>
+                            <span class="helper">How long to look away (seconds)</span>
+                        </div>
+                        <input type="number" id="break" min="5" max="120" class="input-field" required>
+                    </div>
+
+                    <div class="divider"></div>
+
+                    <div class="form-row">
+                        <div class="label-group">
+                            <label for="sound">Sound Effect</label>
+                            <span class="helper">Play a gentle chime</span>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" id="sound">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+
+                    <div class="divider"></div>
+
+                    <div class="form-row">
+                        <div class="label-group">
+                            <label for="notifications">Notifications</label>
+                            <span class="helper">Show system notification</span>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" id="notifications">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- About Section -->
+            <section id="about" class="section">
+                <div class="section-header">
+                    <h2>About Look Away Reminder</h2>
+                </div>
+
+                <div class="card text-content">
+                    <p class="intro">
+                        Look Away Reminder is a simple Chrome extension that gently reminds you to look away from your
+                        screen at regular intervals.
+                        Spending long periods focused on a screen can feel uncomfortable for many people. This extension
+                        supports a common screen-break habit by prompting you to briefly shift your gaze away from your
+                        display. It runs quietly in the background and does not track your activity.
+                    </p>
+                    <div class="highlight-box">
+                        No accounts. No analytics. No distractions.
+                    </div>
+
+                    <h3>How it works</h3>
+                    <ul>
+                        <li>Sends a reminder at regular intervals</li>
+                        <li>Encourages you to look away from your screen for a short break</li>
+                        <li>Plays an optional soft sound so the reminder is not missed</li>
+                        <li>Uses Chrome’s built-in notifications</li>
+                        <li>Works even when the popup is closed</li>
+                    </ul>
+                    <p>The goal is simple: help you remember to pause and rest your eyes during long screen sessions.
+                    </p>
+
+                    <h3>Why people use it</h3>
+
+                    <div class="feature-block">
+                        <h4>Supports screen break habits</h4>
+                        <p>Many people forget to take breaks while working on a computer. A gentle reminder can help
+                            reinforce healthier screen habits without interrupting work.</p>
+                    </div>
+
+                    <div class="feature-block">
+                        <h4>Encourages distance viewing</h4>
+                        <p>Looking away from close screens and focusing on distant objects allows the eyes to change
+                            focus, which many users find more comfortable than continuous near viewing.</p>
+                    </div>
+
+                    <div class="feature-block">
+                        <h4>Helps counter reduced blinking</h4>
+                        <p>Research shows that people tend to blink less while looking at screens. Reminders act as a
+                            cue to relax and blink naturally again.</p>
+                    </div>
+
+                    <div class="feature-block">
+                        <h4>Lightweight and private</h4>
+                        <p>The extension does not read page content, track browsing, or collect personal data. It only
+                            runs a timer and shows reminders.</p>
+                    </div>
+
+                    <h3>Scientific background (plain-language summary)</h3>
+                    <p>This extension is inspired by well-documented observations in vision and occupational health
+                        research:</p>
+                    <ul>
+                        <li><strong>Screen use reduces blink rate:</strong> Studies show that sustained screen attention
+                            often lowers natural blink frequency, which may contribute to eye dryness and discomfort.
+                        </li>
+                        <li><strong>Extended near-focus can cause visual fatigue:</strong> Prolonged close-up focusing
+                            places continuous demand on the eye’s focusing system. Shifting gaze to distant objects
+                            allows that system to relax.</li>
+                        <li><strong>Short, regular breaks are commonly recommended:</strong> Vision and occupational
+                            health organizations often recommend frequent short breaks rather than infrequent long ones.
+                        </li>
+                    </ul>
+                    <p><em>The commonly cited “20-20-20” idea is a guideline, not a medical rule. The extension supports
+                            the general concept of regular visual breaks, not a specific medical treatment.</em></p>
+
+                    <h3>What this extension does NOT do</h3>
+                    <ul class="cross-list">
+                        <li>It does not diagnose or treat medical conditions</li>
+                        <li>It does not claim to prevent or cure eye problems</li>
+                        <li>It does not replace professional eye care</li>
+                        <li>It does not monitor health metrics</li>
+                    </ul>
+                    <p>This extension is a reminder tool, not a medical device.</p>
+
+                    <h3>References and further reading</h3>
+                    <div class="references">
+                        <p><strong>Rosenfield, M.</strong><br> Computer vision syndrome: a review of ocular causes and
+                            potential treatments (Ophthalmic and Physiological Optics, 2011)</p>
+                        <p><strong>Sheppard, A. L., & Wolffsohn, J. S.</strong><br> Digital eye strain: prevalence,
+                            measurement and amelioration (BMJ Open Ophthalmology, 2018)</p>
+                        <p><strong>American Optometric Association</strong><br> Digital eye strain educational materials
+                        </p>
+                        <p><strong>Mayo Clinic</strong><br> Articles on eye strain and screen use</p>
+                    </div>
+                </div>
+            </section>
+
+        </main>
 
         <div id="toast" class="toast">Saved successfully!</div>
     </div>

@@ -8,37 +8,54 @@
     <link rel="stylesheet" href="popup.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
     <div class="container">
         <header>
-            <h1>Look Away</h1>
+            <div class="brand">
+                <img src="icons/icon128.png" alt="Logo" class="logo">
+                <h1>Look Away</h1>
+            </div>
             <div id="status-badge" class="badge">Checking...</div>
         </header>
 
         <main>
             <div class="visual-container">
-                <div class="ring-container">
-                    <svg class="progress-ring" width="120" height="120">
-                        <circle class="progress-ring__bg" stroke-width="4" fill="transparent" r="52" cx="60" cy="60" />
-                        <circle class="progress-ring__circle" stroke-width="4" fill="transparent" r="52" cx="60"
-                            cy="60" />
+                <div class="ring-wrapper">
+                    <svg class="progress-ring" width="140" height="140">
+                        <circle class="progress-ring__bg" stroke-width="6" fill="transparent" r="60" cx="70" cy="70" />
+                        <circle class="progress-ring__circle" stroke-width="6" fill="transparent" r="60" cx="70"
+                            cy="70" />
                     </svg>
-                    <div class="timer-text" id="timer-display">20:20</div>
+                    <div class="timer-content">
+                        <div class="timer-value" id="timer-display">--:--</div>
+                        <div class="timer-label" id="sub-message">Loading...</div>
+                    </div>
                 </div>
-                <p id="sub-message" class="sub-message">Loading...</p>
             </div>
 
-            <div class="controls">
-                <button id="toggle-btn" class="btn primary">Start</button>
-                <button id="test-btn" class="btn secondary">Test</button>
+            <div class="controls-wrapper">
+                <button id="toggle-btn" class="btn btn-primary">
+                    <span class="btn-text">Start</span>
+                </button>
+                <button id="test-btn" class="btn btn-secondary">
+                    <span class="btn-text">Test Reminder</span>
+                </button>
             </div>
         </main>
 
         <footer>
-            <button id="options-btn" class="link-btn">Settings</button>
+            <button id="options-btn" class="icon-btn" aria-label="Settings">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="3"></circle>
+                    <path
+                        d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z">
+                    </path>
+                </svg>
+            </button>
         </footer>
     </div>
     <script src="popup.js"></script>
